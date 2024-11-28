@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Dashboard de Inventario Adidas</h2>
+
+    <!-- Tarjetas de resumen -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ventas Totales</h5>
+                    <p class="card-text h3">{{ total_ventas }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Unidades Vendidas</h5>
+                    <p class="card-text h3">{{ total_unidades }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Precio Promedio</h5>
+                    <p class="card-text h3">{{ promedio_precio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ grafico_ventas|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ grafico_region|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de datos -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Detalles de Ventas</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Región</th>
+                            <th>Precio</th>
+                            <th>Unidades</th>
+                            <th>Ventas Totales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in datos_tabla %}
+                        <tr>
+                            <td>{{ item.Product }}</td>
+                            <td>{{ item.Region }}</td>
+                            <td>${{ item.PricePerUnit|floatformat:2 }}</td>
+                            <td>{{ item.UnitsSold }}</td>
+                            <td>${{ item.TotalSales|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .card-title {
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,16 @@
+// {
+//     "name": "docker-django",
+//     "context": "..",
+//     "dockerComposeFile": ["../docker-compose.yml"],
+//     "service": "web",
+//     "workspaceFolder": "/app",
+//     "extensions": [
+//       "ms-python.python",
+//       "ms-python.vscode-pylance",
+//       "ms-azuretools.vscode-docker"
+//     ],
+//     "settings": {
+//       "python.pythonPath": "/usr/local/bin/python"
+//     }
+//   }
+  

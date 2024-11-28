@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Análisis Regional - Adidas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/analisis_regional.css' %}">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo-container">
+            <img src="{% static 'images/AdidasLogo.png' %}" alt="" class="logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="active"><a href="#"><i class="fas fa-chart-pie"></i> Análisis Regional</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Tendencias</a></li>
+            <li><a href="{% url 'inventario' %}"><i class="fas fa-boxes"></i> Inventario</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="page-title">
+                <h1>Análisis Regional</h1>
+                <p class="subtitle">Vista general de rendimiento por región</p>
+            </div>
+            <div class="user-menu">
+                <span class="date">{% now "F Y" %}</span>
+                <button class="refresh-btn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="grafico-container full-width">
+                <div class="stats-header">
+                    <div class="title-group">
+                        <h2>Distribución de Ventas por Región</h2>
+                        <p class="description">Porcentaje de ventas totales por región geográfica</p>
+                    </div>
+                    <div class="controls">
+                        <select class="period-selector" id="periodoSelect" onchange="cambiarPeriodo(this.value)">
+                            <option value="month" {% if periodo_actual == 'month' %}selected{% endif %}>Último Mes</option>
+                            <option value="quarter" {% if periodo_actual == 'quarter' %}selected{% endif %}>Último Trimestre</option>
+                            <option value="year" {% if periodo_actual == 'year' %}selected{% endif %}>Último Año</option>
+                        </select>
+                    </div>
+                </div>
+                {{ grafico_pastel|safe }}
+            </div>
+
+            <div class="grafico-container">
+                <div class="stats-header">
+                    <div class="title-group">
+                        <h2>Participación Porcentual</h2>
+                        <p class="description">Distribución de ventas por categoría</p>
+                    </div>
+                </div>
+                <div class="chart-wrapper" style="height: 500px; width: 100%; margin-top: 20px;">
+                    {{ grafico_barras_apiladas|safe }}
+                </div>
+            </div>
+
+            <div class="grafico-container">
+                <div class="stats-header">
+                    <div class="title-group">
+                        <h2>Beneficio Operativo</h2>
+                        <p class="description">Margen operativo por región</p>
+                    </div>
+                </div>
+                {{ grafico_barras|safe }}
+            </div>
+        </div>
+    </main>
+
+    <script>
+    function cambiarPeriodo(periodo) {
+        // Construir la URL con el nuevo período
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('periodo', periodo);
+        
+        // Recargar la página con el nuevo período
+        window.location.href = currentUrl.toString();
+    }
+
+    // Asegurarse de que el select muestre el período actual al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const periodoActual = urlParams.get('periodo') || 'year';
+        document.getElementById('periodoSelect').value = periodoActual;
+    });
+    </script>
+    <script src="{% static 'js/analisis_regional.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tendencias y Comparativas</title>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+</head>
+<body>
+    <h1>Tendencias y Comparativas</h1>
+
+    <!-- Gráfico de dispersión: Relación entre margen operativo y total de ventas -->
+    <div id="boxplot-sales-margin"></div>
+<script>
+    var boxplotData = [{
+        x: {{ boxplot_data.RangoVentas|safe }},
+        y: {{ boxplot_data.OperatingMargin|safe }},
+        type: 'box',
+        marker: {
+            color: 'blue'
+        }
+    }];
+    var boxplotLayout = {
+        title: 'Relación entre Margen Operativo y Total de Ventas',
+        xaxis: { title: 'Rango de Ventas' },
+        yaxis: { title: 'Margen Operativo (%)' }
+    };
+    Plotly.newPlot('boxplot-sales-margin', boxplotData, boxplotLayout);
+</script>
+
+
+    <!-- Gráfico de líneas: Evolución del margen operativo -->
+    <div id="line-margin-trend"></div>
+    <script>
+        var lineData = [{
+            x: {{ dates|safe }},
+            y: {{ avg_margins|safe }},
+            mode: 'lines+markers',
+            line: { shape: 'spline', color: 'green' }
+        }];
+        var lineLayout = {
+            title: 'Evolución del Margen Operativo a lo Largo del Tiempo',
+            xaxis: { title: 'Fecha' },
+            yaxis: { title: 'Margen Operativo (%)' }
+        };
+        Plotly.newPlot('line-margin-trend', lineData, lineLayout);
+    </script>
+
+    <!-- Gráfico de barras: Comparación de ventas por método -->
+    <div id="bar-sales-method"></div>
+    <script>
+        var barData = [{
+            x: {{ methods|safe }},
+            y: {{ method_sales|safe }},
+            type: 'bar',
+            marker: { color: 'orange' }
+        }];
+        var barLayout = {
+            title: 'Comparación de Ventas por Método de Venta',
+            xaxis: { title: 'Método de Venta' },
+            yaxis: { title: 'Total de Ventas' }
+        };
+        Plotly.newPlot('bar-sales-method', barData, barLayout);
+    </script>
+</body>
+</html>

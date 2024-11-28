@@ -1,0 +1,533 @@
+@font-face {
+    font-family: 'AdihausDIN';
+    src: url('../fonts/AdihausDIN-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --adidas-black: #000000;
+    --adidas-white: #FFFFFF;
+    --adidas-red: #FF0000;
+    --adidas-blue: #0066B2;
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --gray-700: #495057;
+    --gray-800: #343A40;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'AdihausDIN', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--gray-100);
+    min-height: 100vh;
+    color: var(--adidas-black);
+}
+
+.container {
+    max-width: 1440px;
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+/* Header y componentes relacionados */
+.dashboard-header {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 3rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.logo-section {
+    flex: 0 0 auto;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.title-section {
+    flex: 1;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--adidas-white);
+    margin: 0;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    cursor: pointer;
+    animation: titleReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.main-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--adidas-blue) 0%, var(--adidas-red) 100%);
+    transform-origin: left;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.title-underline {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--adidas-blue) 0%, var(--adidas-red) 100%);
+    margin: 0.5rem auto;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #CCCCCC;
+    margin: 0.5rem 0 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Controles */
+.controls-section {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.period-selector {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: var(--adidas-white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.period-selector:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--adidas-blue);
+}
+
+.period-selector option {
+    background-color: var(--adidas-black);
+    color: var(--adidas-white);
+}
+
+.refresh-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--adidas-blue);
+    transform: rotate(180deg);
+}
+
+.refresh-btn i {
+    color: var(--adidas-white);
+    font-size: 1.1rem;
+}
+
+/* Contenedores de gráficos */
+.chart-container {
+    background: var(--adidas-white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+    border: 1px solid var(--gray-200);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.chart-container h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--adidas-black);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chart-container h2 i {
+    color: var(--adidas-blue);
+}
+
+/* Botón de regreso */
+.back-button {
+    background-color: var(--adidas-black);
+    color: var(--adidas-white);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+}
+
+.back-button:hover {
+    background-color: var(--adidas-blue);
+    transform: translateY(-2px);
+    color: var(--adidas-white);
+}
+
+/* Loader y mensajes de error */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    gap: 1rem;
+}
+
+.loader {
+    border: 3px solid var(--gray-200);
+    border-radius: 50%;
+    border-top: 3px solid var(--adidas-blue);
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: var(--adidas-red);
+    text-align: center;
+    padding: 2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Efectos hover */
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    background-size: 200% 200%;
+    animation: shine 3s infinite;
+    border-radius: 15px;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { padding: 1rem; }
+    
+    .dashboard-header {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .main-title { font-size: 2rem; }
+    
+    .controls-section {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .chart-container { padding: 1.5rem; }
+}
+
+/* Animación del título principal */
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--adidas-white);
+    margin: 0;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+    animation: titleReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.main-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--adidas-blue) 0%, var(--adidas-red) 100%);
+    animation: lineGrow 1s cubic-bezier(0.17, 0.67, 0.83, 0.67) 0.7s forwards;
+}
+
+.title-section {
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+}
+
+.title-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 3s infinite;
+}
+
+/* Animaciones keyframes */
+@keyframes titleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes lineGrow {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Efecto hover en el título */
+.main-title:hover {
+    transform: translateY(-5px);
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.main-title:hover::after {
+    transform: scaleX(1.1);
+    height: 6px;
+    background: linear-gradient(90deg, 
+        var(--adidas-red) 0%, 
+        var(--adidas-blue) 50%, 
+        var(--adidas-red) 100%
+    );
+    background-size: 200% auto;
+    animation: gradientFlow 2s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+/* Animación para las letras individuales */
+.letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.letter-animation {
+    animation: letterFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes letterFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de letras en hover */
+.main-title .letter {
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.main-title:hover .letter {
+    animation: letterDance 0.5s ease forwards;
+    color: var(--adidas-white);
+}
+
+.main-title:hover .letter:nth-child(odd) {
+    animation-delay: calc(0.05s * var(--index));
+}
+
+.main-title:hover .letter:nth-child(even) {
+    animation-delay: calc(0.05s * var(--index) + 0.1s);
+}
+
+/* Efecto de brillo en hover */
+.main-title::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.2) 0%, 
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+.main-title:hover::before {
+    opacity: 1;
+    animation: glowPulse 2s infinite;
+}
+
+/* Keyframes para las animaciones */
+@keyframes letterDance {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px) scale(1.1);
+        color: var(--adidas-red);
+    }
+    50% {
+        transform: translateY(0) scale(1);
+        color: var(--adidas-blue);
+    }
+    75% {
+        transform: translateY(-5px) scale(1.05);
+        color: var(--adidas-white);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+}
+  

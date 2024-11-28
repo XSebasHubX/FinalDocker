@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Performance Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+</head>
+<body>
+    <h1>Product Performance Dashboard</h1>
+
+    <!-- Gráfico de barras: Productos más vendidos -->
+    <div id="top-products-bar-chart"></div>
+    <script>
+        var barData = [{
+            x: {{ product_names|safe }},
+            y: {{ units_sold|safe }},
+            type: 'bar',
+            marker: { color: 'blue' }
+        }];
+        var barLayout = {
+            title: 'Productos Más Vendidos (por Unidades)',
+            xaxis: { title: 'Productos' },
+            yaxis: { title: 'Unidades Vendidas' }
+        };
+        Plotly.newPlot('top-products-bar-chart', barData, barLayout);
+    </script>
+
+    <!-- Gráfico de pastel: Proporción de ventas por categoría -->
+    <div id="category-sales-pie-chart"></div>
+    <script>
+        var pieData = [{
+            values: {{ sales|safe }},
+            labels: {{ categories|safe }},
+            type: 'pie'
+        }];
+        var pieLayout = {
+            title: 'Proporción de Ventas por Categoría',
+            height: 400,
+            width: 500
+        };
+        Plotly.newPlot('category-sales-pie-chart', pieData, pieLayout);
+    </script>
+
+    <!-- Gráfico de dispersión: Relación precio-unidades -->
+    <div id="price-units-scatter-chart"></div>
+    <script>
+        var scatterData = [{
+            x: {{ prices|safe }},
+            y: {{ units|safe }},
+            mode: 'markers',
+            marker: {
+                size: 10,
+                color: 'orange'
+            }
+        }];
+        var scatterLayout = {
+            title: 'Relación entre Precio por Unidad y Unidades Vendidas',
+            xaxis: { title: 'Precio por Unidad' },
+            yaxis: { title: 'Unidades Vendidas' }
+        };
+        Plotly.newPlot('price-units-scatter-chart', scatterData, scatterLayout);
+    </script>
+</body>
+</html>

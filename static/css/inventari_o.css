@@ -1,0 +1,48 @@
+/* Estilos para la tabla */
+.table-container {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: #000;
+    color: white;
+    border-color: #dee2e6;
+    text-align: center;
+    padding: 12px;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+/* Estilos para el título */
+h2 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Efectos hover en las filas */
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-container {
+        margin: 10px;
+        padding: 10px;
+        overflow-x: auto;
+    }
+} 

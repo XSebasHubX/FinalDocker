@@ -1,0 +1,497 @@
+:root {
+    --adidas-black: #000000;
+    --adidas-white: #FFFFFF;
+    --adidas-gray: #767677;
+    --adidas-light-gray: #ECEFF1;
+    --success-green: #00A862;
+    --warning-orange: #FF6900;
+    --danger-red: #FF0000;
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--adidas-light-gray);
+    color: var(--adidas-black);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    width: 280px;
+    height: 100vh;
+    background: #000;
+    z-index: 1000;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    padding-bottom: 0;
+}
+
+.menu-sections {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 0;
+}
+
+.sidebar-footer {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    color: var(--adidas-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.logout-button i {
+    font-size: 1.1rem;
+}
+
+.sidebar h2 {
+    color: var(--adidas-white);
+    margin: 0;
+    padding: 1rem 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.sidebar h2 img {
+    width: 150px;
+    height: auto;
+    padding: 0;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    margin-top: -10px;
+}
+
+.menu-section {
+    margin-bottom: 2rem;
+}
+
+.menu-section h3 {
+    color: var(--adidas-gray);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a {
+    color: var(--adidas-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar ul li:hover a {
+    transform: translateX(5px);
+}
+
+.sidebar ul li.active {
+    background-color: var(--adidas-white);
+    color: var(--adidas-black);
+}
+
+.sidebar ul li i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    max-width: calc(100vw - 280px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    background: var(--adidas-white);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: var(--adidas-black);
+    margin: 0;
+}
+
+header button {
+    background-color: var(--adidas-black);
+    color: var(--adidas-white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+header button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Dashboard Cards */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.card {
+    background: var(--adidas-white);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--adidas-black);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--adidas-gray);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--adidas-black);
+}
+
+/* Charts Section */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.chart-container {
+    background: var(--adidas-white);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    min-height: 400px;
+}
+
+.chart-container h3 {
+    color: var(--adidas-black);
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Scrollbar Styles */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard > *, .charts > * {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sidebar {
+        left: -280px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Métricas Principales */
+.metrics-overview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.metric-card {
+    flex: 1;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metric-content {
+    text-align: center;
+}
+
+.metric-content h3 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: 'Roboto Mono', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.metric-icon {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.metric-icon i {
+    font-size: 1.5rem;
+}
+
+/* Gráficos */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: auto auto;
+    gap: 24px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chart-wrapper {
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+.chart-card.large {
+    height: 450px;
+}
+
+.chart-card.large .chart-wrapper {
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 10px;
+}
+
+.chart-card:not(.large):not(.full-width) {
+    height: 400px;
+}
+
+.chart-card.full-width {
+    grid-column: 1 / -1;
+    height: 450px;
+    margin-top: 24px;
+}
+
+.chart-card.full-width .chart-wrapper {
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 10px;
+}
+
+.chart-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Responsive */
+@media screen and (max-width: 1440px) {
+    .chart-card.full-width {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-card.full-width {
+        height: 300px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.metric-card, .chart-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Media queries para diferentes resoluciones */
+@media screen and (min-width: 1920px) {
+    /* Monitores grandes/4K */
+    .main-content {
+        max-width: calc(100vw - 280px);
+    }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    /* Monitores 1440p */
+    .charts-grid {
+        grid-template-columns: minmax(600px, 2.5fr) minmax(250px, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    /* Monitores 1080p */
+    .charts-grid {
+        grid-template-columns: minmax(500px, 2fr) minmax(200px, 1fr);
+    }
+}
+
+/* Ajuste para zoom del navegador */
+@media screen and (max-width: 100%) {
+    .main-content {
+        zoom: 1;
+        transform: scale(1); /* Propiedad estándar */
+        -moz-transform: scale(1); /* Compatibilidad con Firefox */
+        -webkit-transform: scale(1); /* Compatibilidad con navegadores basados en WebKit como Safari */
+        -ms-transform: scale(1);
+    }
+} 

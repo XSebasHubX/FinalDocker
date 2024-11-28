@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Dashboard - Adidas Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <aside class="sidebar">
+        <h2>
+            <img src="{% static 'images/AdidasLogo.png' %}" alt="Adidas Logo">
+        </h2>
+        <nav class="sidebar-content">
+            <div class="menu-sections">
+                <div class="menu-section">
+                    <h3>Principal</h3>
+                    <ul>
+                        <li class="active"><i class="fas fa-home"></i> Dashboard</li>
+                    </ul>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Análisis Detallado</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'AnalisisRegional' %}">
+                                <i class="fas fa-map-marked-alt"></i> Análisis Regional
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'DesempeñoProducto' %}">
+                                <i class="fas fa-boxes"></i> Desempeño por Producto
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'TendenciasComparativas' %}">
+                                <i class="fas fa-chart-line"></i> Tendencias y Comparativas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <a href="{% url 'logout' %}" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>
+                Bienvenido 
+                <span>{{ usuario_actual.first_name }} {{ usuario_actual.last_name }}</span>
+            </h1>
+        </header>
+
+        <div class="metrics-overview">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>VENTAS TOTALES</h3>
+                    <div class="metric-value">$ {{ ventas_totales }}</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>BENEFICIO TOTAL</h3>
+                    <div class="metric-value">$ {{ unidades_totales_vendidas }}</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="metric-content">
+                    <h3>UTILIDAD OPERATIVA</h3>
+                    <div class="metric-value">$ {{ utilidad_operativa_total }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card large">
+                <h3>Ventas por Minorista</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chartCompVentMinor"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Ventas por Región</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chartVenRegTotal"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Agregar esta sección después de charts-grid -->
+        <div class="chart-card full-width">
+            <h3>Distribución Mensual de Ventas y Beneficios</h3>
+            <div class="chart-wrapper" style="height: 400px;">
+                {{ grafica_distribucion_mensual|safe }}
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const chartColors = {
+            primary: ['#000000', '#333333', '#666666', '#999999', '#CCCCCC'],
+            secondary: ['#000000', '#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa']
+        };
+
+        const dataCompVentMinor = {{ comparacion_ventas_minoristas | safe }};
+        const dataDistVentMes = {{ resumen_ventas_beneficio_mes | safe }};
+        const dataVenRegTotal = {{ resumen_ventas_region | safe }};
+        
+        new Chart(document.getElementById('chartCompVentMinor'), {
+            type: 'bar',
+            data: {
+                labels: dataCompVentMinor.map(item => item.Retailer),
+                datasets: [{
+                    label: 'Ventas totales por minorista',
+                    data: dataCompVentMinor.map(item => item.Ventas_Totales),
+                    backgroundColor: chartColors.primary
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: true
+                }
+            },
+            y: {
+                grid: {
+                    display: true
+                },
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+        new Chart(document.getElementById('chartVenRegTotal'), {
+            type: 'pie',
+            data: {
+                labels: dataVenRegTotal.map(item => item.Region),
+                datasets: [{
+                    data: dataVenRegTotal.map(item => item.Ventas_Totales),
+                    backgroundColor: ['#000000', '#333333', '#666666', '#999999', '#CCCCCC']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Funcionalidad del menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

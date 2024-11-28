@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adidas - Análisis de Desempeño de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/desempeño_producto.css' %}">
+    <link href="https://db.onlinewebfonts.com/c/d09523bf42fc76f52b44ac8b58415ae3?family=AdihausDIN" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="logo-section">
+                <img src="{% static 'images/AdidasLogo2.png' %}" alt="Adidas Logo" class="logo-img">
+            </div>
+            <div class="title-section">
+                <h1 class="main-title">Análisis de Desempeño de Productos</h1>
+                <div class="title-underline"></div>
+                <p class="subtitle"></p>
+            </div>
+            <div class="controls-section">
+                <select id="periodoSelect" class="period-selector">
+                    <option value="year">Último Año</option>
+                    <option value="quarter">Último Trimestre</option>
+                    <option value="month">Último Mes</option>
+                </select>
+                <button class="refresh-btn" title="Actualizar datos">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="chart-container">
+            <h2><i class="fas fa-chart-bar"></i>Top Productos por Unidades Vendidas</h2>
+            {{ grafico_barras|safe }}
+        </div>
+
+        <div class="chart-container">
+            <h2><i class="fas fa-chart-pie"></i>Distribución de Ventas por Categoría</h2>
+            {{ grafico_pastel|safe }}
+        </div>
+
+        <div class="chart-container">
+            <h2><i class="fas fa-chart-scatter"></i>Análisis Precio-Demanda</h2>
+            {{ grafico_burbuja|safe }}
+        </div>
+
+        <a href="{% url 'dashboard' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Volver al Dashboard
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/desempeño_productos.js' %}"></script>
+</body>
+</html>

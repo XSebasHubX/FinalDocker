@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Company</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+</head>
+
+<body>
+
+    <header>
+
+        <div class="Menu container">
+            <h1 class="titulo-principal"> Analytics Company </h1>
+            <img class="logo-1" src="{% static 'images/AdidasLogo2.png' %}" alt="">
+            </label>
+
+            <nav class="navbar">
+                <div class="menu-2">
+                    <ul>
+                        <li><a href="/login/auth0">INICIAR SESIÓN</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="header-content container">
+
+            <div class="swiper mySwiper-1">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="slider">
+
+                            <div class="slider-txt">
+                                <h1>¿QUE OFRECEMOS?</h1>
+                                <p>
+                                    "Transformación de Datos en Decisiones Estratégicas.
+                                    Ofrecemos una plataforma de análisis de datos que nos permite obtener insights valiosos a partir de información comercial, nos enfocamos en la visualización interactiva donde podras explorar areas como:
+                                        Desempeño de ventas por regiones, productos y métodos de venta.
+                                        Identificación de tendencias y patrones.
+                                        Comparaciones entre márgenes, precios y unidades vendidas.
+                                    Gracias a nuestros gráficos dinámicos y dashboards intuitivos brindamos soporte para la toma de decisiones estratégicas en tiempo real."
+                                </p>
+                            </div>
+                            <div class="slider-img">
+                                <img src="{% static 'images/slider1.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="swiper-slide">
+                        <div class="slider">
+                            <div class="slider-txt">
+                                <h1>CÓMO FUNCIONA</h1>
+                                <p>
+                                    "Nuestro sistema transforma la complejidad de los datos en insights claros y comprencibles, esto a partir de la información proporcionada la cual procesamos y organizamos los datos para presentarlos de manera comprensible a través de dashboards interactivos y visualizaciones dinámicas. Así, las empresas o nosotros mismos podemos explorar tendencias, comparar métricas clave y descubrir oportunidades que antes eran invisibles. Gracias a nuestra herramienta no solo obtendrás gráficos y estadísticas sino una comprensión que facilitará la toma de decisiones estratégicas, optimizará procesos comerciales y mejorará el rendimiento general de tu negocio."
+                                </p>
+                                <div class="botones">
+                                    <a href="#" class="btn-1">¿AYUDA?</a>
+
+                                </div>
+                            </div>
+                            <div class="slider-img">
+                                <img src="{% static 'images/slider2.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="slider">
+
+                            <div class="slider-txt">
+                                <h1>BENEFICIOS</h1>
+                                <p>
+                                    "Al utilizar nuestra plataforma, puedes tomar decisiones basadas en datos
+                                    actualizados y visualmente representados, lo que facilita el análisis y la
+                                    comprensión de la información que más importa."
+                                </p>        
+                            </div>
+                            <div class="slider-img">
+                                <img src="{% static 'images/slider3.png' %}" alt="">
+                            </div>
+                        </div>g
+                    </div>
+
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="products">
+        <div class="tabs container">
+
+            <input type="radio" name="tabs" id="tab1" checked="checked" class="tabInput" value="1">
+            <label for="tab1">INFORMACIÓN</label>
+            <div class="tab">
+                <div class="swiper mySwiper-2" id="swiper1">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="product">
+
+                                <div class="product-img">
+                                    <h4>MISIÓN</h4>
+                                    <img src="{% static 'images/Mision.svg' %}" alt="">
+                                </div>
+
+
+                                <div class="product-txt">
+                                    <h4></h4>
+                                    <p>
+                                        Proporcionar a las empresas la capacidad de interpretar sus datos de manera efectiva, optimizar sus operaciones y maximizar sus beneficios, lo haremos combinando tecnología, diseño intuitivo y un enfoque en la resolución de problemas reales.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="product">
+                                <div class="product-img">
+                                    <h4>VISIÓN</h4>
+                                    <img src="{% static 'images/Vision.png' %}" alt="">
+                                </div>
+                                <div class="product-txt">
+                                    <h4></h4>
+                                    <p>
+                                        Ser el aliado principal de los comerciantes para el análisis y la visualización de sus datos comerciales, aspiramos a convertirnos en una referencia líder en soluciones de análisis de datos, donde las pequeñas empresas confíen en nuestra plataforma para descubrir insights valiosos y tomar decisiones estratégicas con rapidez y precisión.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="product">
+                                <div class="product-img">
+                                    <h4>¿QUIENES SOMOS?</h4>
+                                    <img src="{% static 'images/equipo.png' %}" alt="">
+                                </div>
+                                <div class="product-txt">
+                                    <h4></h4>
+                                    <p>
+                                    Somos un equipo que hemos decidido adentrarnos en el fascinante mundo del análisis de datos, este proyecto representa nuestra primera incursión en este ámbito en donde hemos combinado lo que hemos aprendido a lo largo del semestre con nuestro entusiasmo por resolver problemas del mundo real.
+La idea detrás de este proyecto surgió al darnos cuenta de la cantidad de pequeñas y medianas empresas que enfrentan desafíos para interpretar los datos que generan día a día y desde nuestra perspectiva, queríamos aportar una solución que no solo facilitara ese proceso sino que también sirviera como un puente entre la información y las decisiones estratégicas..
+                                    </p>                               
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+  <!-- Justo antes del footer -->
+<section class="pre-footer">
+    <div class="container">
+        <!-- Sección de Ayuda -->
+        <div class="help-section">
+            <div class="info-img">
+                <img src="{% static 'images/info2.png' %}" alt="Ayuda">
+            </div>
+            <div class="info-txt">
+                <h2>AYUDA</h2>
+                <p>¿Tienes alguna pregunta? Estamos aquí para ayudarte.</p>
+                <a href="#" class="btn-help">Más información</a>
+            </div>
+        </div>
+
+        <!-- Sección de Contacto -->
+        <div class="contact-section">
+            <h2>CONTACTO</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Correo</h4>
+                    <p>Sebastianutpfisc@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h4>Teléfono</h4>
+                    <p>57657-47476</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer class="footer container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img class="logo-2" src="{% static 'images/AdidasLogo.png' %}" alt="Logo H&M">
+            </div>
+            
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-social">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'images/s1.svg' %}" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'images/s2.svg' %}" alt="Twitter">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'images/s3.svg' %}" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 DATOS ADIDAS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+
+
+
+
+
+

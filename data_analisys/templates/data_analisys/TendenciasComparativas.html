@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adidas - Tendencias Comparativas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/tendencia_c.css' %}">
+    <link href="https://db.onlinewebfonts.com/c/d09523bf42fc76f52b44ac8b58415ae3?family=AdihausDIN" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="logo-section">
+                <img src="{% static 'images/AdidasLogo2.png' %}" alt="Adidas Logo" class="logo-img">
+            </div>
+            <div class="title-section">
+                <h1 class="main-title">Tendencias Comparativas</h1>
+                <div class="title-underline"></div>
+                <p class="subtitle">Análisis de Datos</p>
+            </div>
+            <div class="controls-section">
+                <select id="periodoSelect" class="period-selector form-select">
+                    <option value="year">Último Año</option>
+                    <option value="quarter">Último Trimestre</option>
+                    <option value="month">Último Mes</option>
+                </select>
+                <button class="refresh-btn" title="Actualizar datos" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="chart-container">
+                <h2><i class="fas fa-chart-line me-2"></i>Relación entre Margen Operativo y Total de Ventas</h2>
+                <div class="chart-wrapper">
+                    {{ grafico_boxplot|safe }}
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2><i class="fas fa-chart-line me-2"></i>Evolución del Margen Operativo a lo Largo del Tiempo</h2>
+                <div class="chart-wrapper">
+                    {{ grafico_lineas|safe }}
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2><i class="fas fa-chart-bar me-2"></i>Comparación de Ventas entre Métodos de Venta</h2>
+                <div class="chart-wrapper">
+                    {{ grafico_barras|safe }}
+                </div>
+            </div>
+
+            <a href="{% url 'dashboard' %}" class="back-button">
+                <i class="fas fa-arrow-left me-2"></i>
+                Volver al Dashboard
+            </a>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/tendencia_c.js' %}"></script>
+</body>
+</html>
